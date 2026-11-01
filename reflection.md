@@ -66,8 +66,13 @@ the first baseline; these instructions exposed the gaps in that baseline.
 All work in this chat used one continuing conversation, organized with files and
 progress updates. Separate phase chats and a multi-model comparison were not used.
 
-**Your response:** Which assistance was most useful to you? Did maintaining one
-chat help or make it harder to track the phases? Explain your actual experience.
+**My experience with AI assistance:** Work mode helped produce a complete
+project structure and documented its limitations. One limitation that stood out
+to me was that session memory keeps data during interaction but does not
+permanently save pets and tasks between application runs.
+
+**Still to reflect on:** Did maintaining one chat help or make it harder to
+track the phases? Explain your actual experience.
 
 ### 3b. Judgment and verification
 
@@ -112,8 +117,9 @@ when you ran it?
 
 ### 5b. What to improve
 
-**Your response:** Which implementation or workflow choice would you change in
-another iteration?
+In another iteration, I would add a save-and-load feature. A pet owner should
+be able to reopen the app without entering everything again. I would also test
+that dates, completion status, and recurring tasks survive saving and loading.
 
 ### 5c. Key takeaway
 

@@ -45,9 +45,15 @@ The assignment-aligned skeleton was saved as a learning reference during revisio
 no earlier skeleton-only commit was fabricated. The phase tasks were handled in
 one chat, so no separate-chat experience is claimed.
 
-**Student manual review:** Not yet recorded. Add what you actually verified,
-modified, or rejected and explain your reasoning. Personal learning and judgment
-must come from your experience.
+**Student reflection choice:** The student selected the session-memory
+limitation as a point that stood out and chose save-and-load functionality as a
+future improvement. Their proposed tests would check that dates, completion
+status, and recurring tasks survive saving and loading. These responses were
+added to reflection.md; persistence has not been implemented.
+
+**Student manual verification:** Not yet recorded. Add what you actually
+verified, modified, or rejected and explain your reasoning. Selecting a future
+improvement is not a claim of having run tests or rejected an AI suggestion.
 
 ## Optional extensions
 
