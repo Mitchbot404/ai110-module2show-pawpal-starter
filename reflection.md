@@ -1,8 +1,7 @@
 # PawPal+ Project Reflection
 
-*Draft prepared with Codex assistance from this project's recorded work, my
-stated design choices, and my browser checks. I will review the wording before
-submission, particularly the personal takeaways and confidence rating.*
+*Prepared with Codex assistance using the project's recorded work, my stated
+design choices, and my browser checks.*
 
 ## 1. System Design
 
