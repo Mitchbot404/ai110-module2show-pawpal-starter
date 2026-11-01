@@ -12,12 +12,13 @@ student. This is an evidence map, not an instructor's grade.
 | Two meaningful algorithms | 3 | Chronological and priority sorting, pet/status/date filtering, recurring occurrences, and duration conflict warnings across pets | Supported |
 | End-to-end CLI demo | 3 | `main.py` creates one owner, two pets, and four tasks; uses Scheduler; actual readable CLI output in README | Supported |
 | Basic pytest suite | 3 | `tests/test_pawpal.py` and `tests/test_app.py`; final recorded result: 44 passing tests | Supported |
-| Documentation and AI reflection | 3 | README includes architecture, algorithms, run/test instructions, coverage summary, and passing test output; reflection includes factual design and verification notes | README criteria supported; personal reflection unfinished |
+| Documentation and AI reflection | 3 | README includes architecture, algorithms, run/test instructions, coverage summary, and passing test output; full AI-assisted reflection draft records design choices, AI influence, and verification | Supported by documentation; student review of reflection draft pending |
 
-The remaining core submission gap is the student's reflection: the file still
-contains personal prompts. Complete the account of accepted/rejected suggestions
-and verification with actual experience before submitting. Do not count the
-assistant's decisions as evidence of the student's own review.
+The reflection is now fully drafted at the student's request, using their stated
+preferences and browser evidence. Before submitting, the student should review
+its personal takeaways and proposed confidence rating. The draft distinguishes
+assistant-run tests from the student's manual checks and does not claim that
+future enhancements have been implemented.
 
 ## Stretch features: up to 10 points
 

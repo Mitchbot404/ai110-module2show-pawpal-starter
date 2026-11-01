@@ -21,12 +21,14 @@
 
 ## Student review and personal reflection
 
-- [ ] Run the app and perform the README walkthrough.
+- [x] Launch the app and verify the conflict-resolution flow in the browser.
+- [ ] Complete any remaining steps of the README walkthrough.
 - [ ] Explain Owner–Pets–Tasks and Scheduler's access to all_tasks().
 - [ ] Explain one sorting, recurrence, and conflict test.
-- [ ] Replace the personal prompts in reflection.md with actual observations.
-- [ ] Record a real AI suggestion you rejected or modified and why.
-- [ ] State honestly that this work used one chat; separate phase chats were not used.
+- [x] Draft complete reflection answers using the recorded work and student observations.
+- [ ] Review the AI-assisted reflection draft, including personal takeaways and confidence rating.
+- [x] Record the student's choice of warnings over automatic rescheduling and proposed free-time suggestions.
+- [x] State honestly that this work used one chat; separate phase chats were not used.
 - [ ] Review your course's AI attribution and submission instructions.
 
 ## GitHub publication

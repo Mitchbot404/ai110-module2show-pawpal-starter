@@ -1,141 +1,162 @@
 # PawPal+ Project Reflection
 
-This document contains verified project facts and clearly marked personal
-prompts. Complete the personal responses after running and reviewing the app.
+*Draft prepared with Codex assistance from this project's recorded work, my
+stated design choices, and my browser checks. I will review the wording before
+submission, particularly the personal takeaways and confidence rating.*
 
 ## 1. System Design
 
 ### 1a. Initial design
 
-**Three core user actions:** add a pet, schedule or edit its care tasks, and view
-a sorted daily schedule with completion controls and conflict warnings.
+The three main actions are adding a pet, scheduling or editing its care tasks,
+and viewing today's schedule with completion controls and conflict warnings.
 
-**Assignment-aligned design:** Owner stores multiple Pets and exposes all their
-task associations. Pet stores identity and its task list. Task stores the
-description, time, frequency, date, duration, priority, and completion status.
-Scheduler receives the Owner and handles filtering, ordering, completion, and
-warnings. All four classes are dataclasses.
+The assignment-aligned design uses four classes. Owner stores multiple pets.
+Pet holds identifying information and a list of tasks. Task represents one
+scheduled occurrence, including its description, time, date, frequency, duration,
+priority, and completion status. Scheduler retrieves tasks from the Owner's pets
+and handles sorting, filtering, recurrence, and conflicts.
 
-**Your response:** Explain why you agree with these responsibilities and which
-relationship in the draft UML helped you understand the system.
+The Owner–Pet–Task relationship reflects how someone would organize care in real
+life: one owner can have several pets, and each pet has its own activities.
+Keeping scheduling logic separate from the interface also lets the terminal
+demo and Streamlit app use the same backend.
 
 ### 1b. Design changes
 
-The first AI-generated baseline supported one pet per plan and used a time-budget
-selection algorithm. Once the detailed assignment arrived, the implementation
-was revised to Owner–Pets–Tasks, scheduled clock times, completion history, and
-completion-triggered recurrence. The backend was renamed to pawpal_system.py,
-and the Task class replaced CareTask. Stable IDs were added so identical task
-descriptions and recurring occurrences can be edited independently.
+The first AI-generated baseline focused on one pet and a time-budget plan.
+After I supplied the detailed phase instructions, the implementation changed to
+support multiple pets, explicit clock times, task completion, and recurring
+occurrences. The backend became pawpal_system.py, using the required Task class.
+Stable task IDs distinguish activities with identical descriptions.
 
-**Your response:** Describe a specific decision you personally reviewed or
-changed. Do not describe the later learning skeleton as an earlier commit.
+My own design decision came from trying the conflict workflow. I chose to keep
+warnings instead of having the app automatically move appointments. I proposed
+adding suggested free times so the owner could choose a fix without changing
+other pets' schedules. That suggestion feature is a future improvement, not
+part of the current implementation.
+
+The workflow did not follow the assignment's suggested order exactly: the first
+baseline existed before the full instructions arrived. The later skeleton is a
+learning reference, not evidence of an earlier skeleton-only commit.
 
 ## 2. Scheduling Logic and Tradeoffs
 
 ### 2a. Constraints and priorities
 
-The scheduler sorts by exact date and HH:MM time, filters by pet/status/date,
-and detects conflicts using pending task durations. An optional priority view
-orders high before medium before low, then date/time. Completion creates the
-next daily or weekly occurrence, retaining the original as history.
+The scheduler considers each task's date, time, duration, pet, and completion
+status. It can show tasks chronologically or filter them by pet and status.
+The optional priority view puts high-priority tasks first, then orders by date
+and time. It changes the display order without changing appointment times.
 
-**Your response:** Explain which of these behaviors matters most for your
-example pet owner and why.
+Conflict detection matters because one owner may need to care for different pets
+at the same time. A task's duration matters as well as its starting time: tasks
+starting at 08:00 and 08:05 could still overlap. Completing a daily or weekly
+task creates its next occurrence while keeping the completed one as history.
 
 ### 2b. Tradeoffs
 
-Interval comparisons detect partial overlaps that an exact-start-time check
-would miss. The pairwise implementation can take O(n²) time, a reasonable cost
-for a small household schedule; a more complex index could help at larger scale.
-Warnings let the owner decide what to reschedule. They do not automatically move
-time-sensitive appointments. Late recurring-task completion creates one future
-occurrence rather than generating every missed occurrence.
+I would keep the warning and let the owner choose what to change. Automatic
+rescheduling might remove a conflict but move a task to a time the owner did
+not intend. The tradeoff is that the owner must take an extra step to fix it.
 
-**My design choice:** I would keep the conflict warning and let the owner choose
-the change. As a quick-fix enhancement, I would offer suggested times that fit
-around existing tasks for every pet. Choosing a new time should move only the
-selected task and leave all other scheduled times unchanged. This keeps the
-owner in control while making conflicts easier to resolve. Suggested free times
-are a proposed enhancement; the current app provides warnings and manual editing.
+My preferred improvement is a quick-fix list of suggested times. Each suggestion
+should fit the full duration around pending tasks for all pets, and applying
+one should move only the selected task. This would reduce manual effort while
+preserving the owner's control.
+
+The current conflict algorithm compares overlapping intervals and can take
+O(n²) time. That is reasonable for a small household schedule. An exact-start-only
+check would be simpler but would miss tasks that overlap despite starting at
+different times.
 
 ## 3. AI Collaboration
 
-### 3a. How AI was used
+### 3a. How I used AI
 
-Codex inspected the starter, drafted designs, edited multiple project files,
-implemented the models and UI, generated tests, ran the CLI and pytest, and
-prepared documentation. The user supplied the detailed phase instructions after
-the first baseline; these instructions exposed the gaps in that baseline.
+This was my first official experience using Work mode. Codex helped inspect the
+starter, draft the design and UML, edit the Python files, connect the interface,
+create tests, run the demo, and organize the documentation. I supplied the
+assignment details, created my GitHub fork, ran the app, and gave feedback on
+the behavior I wanted.
 
-All work in this chat used one continuing conversation, organized with files and
-progress updates. Separate phase chats and a multi-model comparison were not used.
+Work mode helped produce a complete project structure and documented its
+limitations. One limitation that stood out was that session memory preserves
+data during interaction but does not permanently save pets and tasks between
+application runs.
 
-**My experience with AI assistance:** Work mode helped produce a complete
-project structure and documented its limitations. One limitation that stood out
-to me was that session memory keeps data during interaction but does not
-permanently save pets and tasks between application runs.
-
-**Still to reflect on:** Did maintaining one chat help or make it harder to
-track the phases? Explain your actual experience.
+We used one continuing chat rather than separate chats for each phase. This
+kept the files, troubleshooting, and design discussion together, although the
+conversation became long. The phase guide and checklists provided structure.
+Because I did not try separate phase chats, I cannot compare the two approaches
+from experience.
 
 ### 3b. Judgment and verification
 
-A concrete correction was replacing the first AI design's single-pet/time-budget
-behavior with the course's multi-pet/time-based task model. The final tests verify
-observable behavior, including automatic recurrence and duplicate-time warnings.
+When the assistant asked whether I wanted warnings or automatic rescheduling,
+I chose warnings. I modified the proposed direction by asking for suggested
+alternative times that would not interfere with existing appointments for the
+same or different pets. The owner should choose the change.
 
-When the AI assistant asked whether I preferred warnings or automatic
-rescheduling, I chose to keep warnings. I would improve the warning-only design
-with suggested alternative times checked against the schedules of all pets,
-rather than letting the app move tasks automatically. Other appointments should
-stay unchanged, and the owner should choose which suggestion to apply.
+I checked the current behavior in the browser. Mochi's Breakfast and Luna's
+Medication both appeared at 08:00 with a conflict warning. After I changed
+Medication to 08:15, the app showed no pending conflicts. I supplied screenshots
+of both states. This checked the existing warning and manual-edit workflow;
+it did not verify the suggested-time feature, which has not been built.
 
-I evaluated the existing behavior in the browser: Breakfast for Mochi and
-Medication for Luna both appeared at 08:00 with a conflict warning. After I
-changed Medication to 08:15, the app showed no pending conflicts. I provided
-before-and-after screenshots. This verified the current warning and manual-edit
-workflow; it did not test the proposed suggestion feature, which is not built yet.
+I also encountered a startup issue: Streamlit was waiting for input at an
+optional email prompt. Pressing Enter without entering an email allowed the app
+to start. That experience showed why looking at the actual terminal state is
+useful when troubleshooting.
 
 ## 4. Testing and Verification
 
 ### 4a. What was tested
 
-The final suite has 44 passing cases covering ownership, completion, sorting,
-filters, daily/weekly recurrence, repeated completion, date boundaries, invalid
-inputs, overlap warnings, and Streamlit UI/session integration. Core Task
-completion and Pet task-addition tests are included. See docs/test-plan.md and
-docs/verification.md for details.
+Codex ran the automated suite, which finished with 44 passing cases. These cover
+adding tasks, task completion, multiple pets, sorting, filtering, daily and weekly
+recurrence, repeated completion, date boundaries, invalid inputs, conflicts, and
+Streamlit session behavior.
 
-**Your response:** Explain one test's inputs, expected result, and the bug it
-would detect. Why is that behavior important?
+For example, the recurrence test completes a daily task and checks that the
+original is marked complete and a new pending occurrence is added for the next
+day with a different ID. It then completes the original again and checks that
+another copy is not created. This detects a bug that could duplicate tasks when
+the same action is repeated.
 
-**My manual check:** I checked the 08:00 Breakfast/Medication conflict in the
-browser, moved Medication to 08:15, and saw the warning clear. This checks both
-detection and clearing a resolved conflict, rather than only displaying a warning.
+My browser check complemented the automated results: I saw the cross-pet
+conflict and confirmed that moving Medication cleared it. Checking both the
+warning and its removal helps catch stale or incorrectly calculated warnings.
 
 ### 4b. Confidence
 
-The documented engineering assessment is 4/5 based on tests and the CLI demo.
-The backend has 100% statement coverage, but this does not prove every possible
-behavior. I also checked the conflict warning and its resolution in the browser.
-A full accessibility audit, permanent storage, and reminders remain outside scope.
+Based on the documented test results and my conflict-resolution check, I would
+rate this version 4 out of 5. The backend has 100% statement coverage, but that
+does not mean every possible input or user interaction has been verified.
 
-**Your response:** Give your own 1–5 rating after reviewing the results, and name
-one edge case or next feature you would test.
+I would next test saved data and suggested free times if those features were
+added. Important cases include preserving dates and completion status after
+loading, finding a slot that fits a task's full duration, and handling a day with
+no available slot. A suggestion should also avoid tasks that cross midnight.
 
 ## 5. Reflection
 
 ### 5a. What went well
 
-**Your response:** What are you most satisfied with, and what did you observe
-when you ran it?
+A useful result was seeing the conflict workflow operate in the browser. The
+warning identified tasks belonging to different pets, and it cleared after I
+changed the time. That gave me something concrete to evaluate beyond reading
+code or seeing a test summary.
 
-### 5b. What to improve
+The project also brought the UML, Python classes, terminal demo, interface, and
+tests into one structure. The written walkthrough made it easier to connect
+the assignment requirements to specific files and behaviors.
+
+### 5b. What I would improve
 
 In another iteration, I would add a save-and-load feature. A pet owner should
-be able to reopen the app without entering everything again. I would also test
-that dates, completion status, and recurring tasks survive saving and loading.
+be able to reopen the app without entering everything again. I would test that
+dates, completion status, and recurring tasks survive saving and loading.
 
 I would also add quick-fix suggestions for conflicts. Each suggested time should
 fit the task's full duration without overlapping another pet's tasks or moving
@@ -143,5 +164,12 @@ any existing appointments. The owner would choose whether to apply a suggestion.
 
 ### 5c. Key takeaway
 
-**Your response:** What did you learn about being the lead architect when AI
-can edit many files quickly? Support your answer with an actual project decision.
+AI can make changes quickly, but I still need to provide the requirements,
+try the result, and decide whether its behavior makes sense. The first baseline
+needed revision once the detailed instructions were available, which shows why
+working code alone does not establish that an assignment is complete.
+
+My decision about conflict handling is an example of that responsibility:
+I want help finding a free time while keeping control over which appointment
+moves. Being the lead architect means making those choices and checking the
+result, even when AI writes much of the implementation.

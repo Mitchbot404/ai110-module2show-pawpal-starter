@@ -60,6 +60,16 @@ free times across all pets and leave every other appointment unchanged. The
 owner would choose the change. This was recorded in reflection.md as a design
 decision and future enhancement, not as an implemented feature.
 
+## Reflection drafting
+
+After selecting the persistence improvement and explaining their preference for
+owner-controlled conflict fixes, the student asked Codex to write the complete
+reflection for review. Codex drafted the remaining sections using the recorded
+workflow, test results, screenshots, and stated design choices. The document is
+marked as an AI-assisted draft pending student review; personal takeaways and
+the proposed 4/5 confidence rating should be checked by the student. The student
+did not claim to have personally run the automated suite or implemented the code.
+
 ## Optional extensions
 
 Implemented: Challenge 3, priority-first then date/time ordering, documented with
