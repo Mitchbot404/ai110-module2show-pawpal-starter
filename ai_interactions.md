@@ -51,9 +51,14 @@ future improvement. Their proposed tests would check that dates, completion
 status, and recurring tasks survive saving and loading. These responses were
 added to reflection.md; persistence has not been implemented.
 
-**Student manual verification:** Not yet recorded. Add what you actually
-verified, modified, or rejected and explain your reasoning. Selecting a future
-improvement is not a claim of having run tests or rejected an AI suggestion.
+**Student manual verification and design judgment:** The student got Streamlit
+running by pressing Enter at its optional email prompt. They supplied screenshots
+showing the 08:00 Breakfast/Medication conflict, followed by Medication at 08:15
+and a no-conflicts confirmation. Asked to choose warnings or automatic
+rescheduling, they chose warnings with a proposed quick-fix improvement: suggest
+free times across all pets and leave every other appointment unchanged. The
+owner would choose the change. This was recorded in reflection.md as a design
+decision and future enhancement, not as an implemented feature.
 
 ## Optional extensions
 

@@ -52,7 +52,12 @@ Warnings let the owner decide what to reschedule. They do not automatically move
 time-sensitive appointments. Late recurring-task completion creates one future
 occurrence rather than generating every missed occurrence.
 
-**Your response:** Choose one tradeoff and defend or revise it with an example.
+**My design choice:** I would keep the conflict warning and let the owner choose
+the change. As a quick-fix enhancement, I would offer suggested times that fit
+around existing tasks for every pet. Choosing a new time should move only the
+selected task and leave all other scheduled times unchanged. This keeps the
+owner in control while making conflicts easier to resolve. Suggested free times
+are a proposed enhancement; the current app provides warnings and manual editing.
 
 ## 3. AI Collaboration
 
@@ -80,10 +85,17 @@ A concrete correction was replacing the first AI design's single-pet/time-budget
 behavior with the course's multi-pet/time-based task model. The final tests verify
 observable behavior, including automatic recurrence and duplicate-time warnings.
 
-**Your response:** Identify a suggestion you personally rejected or modified,
-why, and the evidence you used. If you have not done that yet, review the
-recurrence and conflict policies and make an actual decision before answering.
-The assistant's revisions alone are not evidence of your personal judgment.
+When the AI assistant asked whether I preferred warnings or automatic
+rescheduling, I chose to keep warnings. I would improve the warning-only design
+with suggested alternative times checked against the schedules of all pets,
+rather than letting the app move tasks automatically. Other appointments should
+stay unchanged, and the owner should choose which suggestion to apply.
+
+I evaluated the existing behavior in the browser: Breakfast for Mochi and
+Medication for Luna both appeared at 08:00 with a conflict warning. After I
+changed Medication to 08:15, the app showed no pending conflicts. I provided
+before-and-after screenshots. This verified the current warning and manual-edit
+workflow; it did not test the proposed suggestion feature, which is not built yet.
 
 ## 4. Testing and Verification
 
@@ -98,12 +110,16 @@ docs/verification.md for details.
 **Your response:** Explain one test's inputs, expected result, and the bug it
 would detect. Why is that behavior important?
 
+**My manual check:** I checked the 08:00 Breakfast/Medication conflict in the
+browser, moved Medication to 08:15, and saw the warning clear. This checks both
+detection and clearing a resolved conflict, rather than only displaying a warning.
+
 ### 4b. Confidence
 
 The documented engineering assessment is 4/5 based on tests and the CLI demo.
 The backend has 100% statement coverage, but this does not prove every possible
-behavior. Browser visual/accessibility checks, permanent storage, and reminders
-were outside this implementation.
+behavior. I also checked the conflict warning and its resolution in the browser.
+A full accessibility audit, permanent storage, and reminders remain outside scope.
 
 **Your response:** Give your own 1–5 rating after reviewing the results, and name
 one edge case or next feature you would test.
@@ -120,6 +136,10 @@ when you ran it?
 In another iteration, I would add a save-and-load feature. A pet owner should
 be able to reopen the app without entering everything again. I would also test
 that dates, completion status, and recurring tasks survive saving and loading.
+
+I would also add quick-fix suggestions for conflicts. Each suggested time should
+fit the task's full duration without overlapping another pet's tasks or moving
+any existing appointments. The owner would choose whether to apply a suggestion.
 
 ### 5c. Key takeaway
 

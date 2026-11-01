@@ -52,10 +52,19 @@ reruns, table contents, warnings, state, editing, deletion, and recurrence.
 The UI test runner requires local sockets and used the approved execution
 environment. The tests allow 15 seconds per app run for initial dependency loads.
 
+## Student browser check
+
+The student supplied before-and-after screenshots of the running app. The first
+shows Mochi's Breakfast and Luna's Medication both at 08:00 with a conflict
+warning. The second shows Medication at 08:15 and the no-pending-conflicts
+confirmation while the table is filtered to Luna. This provides manual evidence
+for displaying a cross-pet warning and clearing it after a manual time edit.
+
 ## Limits
 
 Coverage measures executed statements, not proof of correctness. The Owner rename
 success path was not exercised by the UI tests. CLI printing was verified by the
-separate main.py run rather than the automated coverage run. No visual browser
-review or accessibility audit was performed. Permanent storage and reminders
-are outside scope.
+separate main.py run rather than the automated coverage run. The student browser
+check above covers one conflict-resolution flow; a full accessibility audit
+was not performed. Permanent storage, free-time suggestions, and reminders are
+outside the current implementation.
