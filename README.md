@@ -124,6 +124,19 @@ Pending on demo date: 3
 Completed on demo date: 1
 ```
 
+## Output formatting
+
+The terminal demo uses `main.print_schedule()` with Python f-string field widths
+to align time, pet, task, duration, priority, and status columns. Section labels
+separate the chronological schedule, filtered results, conflict warnings, and
+priority view; the sample output above shows the actual result.
+
+The browser UI in `app.py` uses Streamlit's `st.table()` for structured schedules,
+`st.warning()` for conflicts, `st.success()` for confirmations, and `st.info()`
+for empty results. Status cells use ✅ Complete and ⏳ Pending, so status remains
+readable without relying on color. These formatting features use Python and
+Streamlit; no additional formatting library is required.
+
 ## Testing PawPal+
 
 With the environment activated, run:
@@ -182,3 +195,4 @@ The AI assistance and actual design correction are recorded in
 sequence: a first baseline existed before the detailed six-phase instructions
 arrived. No earlier skeleton-only commit or separate phase chats were fabricated.
 Fork/push status and remaining steps are in [submission checklist](docs/submission-checklist.md).
+See the [grading rubric review](docs/rubric-review.md) for required and bonus evidence.
