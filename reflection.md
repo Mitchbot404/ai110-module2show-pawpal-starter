@@ -98,11 +98,11 @@ I chose warnings. I modified the proposed direction by asking for suggested
 alternative times that would not interfere with existing appointments for the
 same or different pets. The owner should choose the change.
 
-I checked the current behavior in the browser. Mochi's Breakfast and Luna's
-Medication both appeared at 08:00 with a conflict warning. After I changed
-Medication to 08:15, the app showed no pending conflicts. I supplied screenshots
-of both states. This checked the existing warning and manual-edit workflow;
-it did not verify the suggested-time feature, which has not been built.
+I tested conflict detection by changing Luna's Medication from 08:00 to 08:15.
+The conflict warning disappeared, confirming that the app recognized the
+updated schedule. As a future improvement, I would add suggested available
+times so the owner could resolve conflicts more easily without affecting other
+scheduled tasks.
 
 I also encountered a startup issue: Streamlit was waiting for input at an
 optional email prompt. Pressing Enter without entering an email allowed the app
